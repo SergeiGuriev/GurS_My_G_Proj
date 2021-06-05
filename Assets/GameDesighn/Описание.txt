@@ -1,0 +1,2 @@
+Папка для всего, что связано с дизайном. 
+Prefabs, Animations, ScriptableObjects и тд. 
