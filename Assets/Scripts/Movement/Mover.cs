@@ -1,4 +1,5 @@
 ﻿using RPG.Combat;
+using RPG.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using UnityEngine.AI;
 
 namespace RPG.Movement
 {
-    public class Mover : MonoBehaviour
+    public class Mover : MonoBehaviour, IAction
     {
         NavMeshAgent navMeshAgent;
         private void Start()
@@ -25,12 +26,13 @@ namespace RPG.Movement
             Vector3 localVelocity = transform.InverseTransformDirection(globalVelocity); // если персонаж будет бежать в сторону отдаления от мировой Z координаты
                                                                                          //Debug.Log(globalVelocity.z);                                               // то его velocity будет отрицательным
             float speed = localVelocity.z;                                               // поэтому нужно расчитывать скорость относительно (0,0,0) координат персонажа
-            GetComponent<Animator>().SetFloat("ForwardSpeed", speed);  // мне нужно знать с какой скоростью(изменения Z координаты) персонаж отдаляется от своей позиции, 
+            GetComponent<Animator>().SetFloat("forwardSpeed", speed);  // мне нужно знать с какой скоростью(изменения Z координаты) персонаж отдаляется от своей позиции, 
         }                                                              // а не относительно нуля мира
 
         public void StartMoveAction(Vector3 destination)
         {
-            GetComponent<Fighter>().CancelAttack();
+            GetComponent<ActionScheduler>().StartAction(this);
+            GetComponent<Fighter>().Cancel();
             MoveTo(destination);
         }
 
@@ -40,7 +42,7 @@ namespace RPG.Movement
             navMeshAgent.isStopped = false;
         }
 
-        public void StopMoving()
+        public void Cancel()
         {
             navMeshAgent.isStopped = true;
         }
