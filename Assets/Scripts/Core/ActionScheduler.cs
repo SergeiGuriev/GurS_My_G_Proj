@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using RPG.Combat;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,38 +17,9 @@ namespace RPG.Core
             }
             currentAction = action;
         }
+        public void CancelCurrentAction()
+        {
+            StartAction(null);      // currentAction = null; будет отключать NavMesh движение и атаку у мёртвых врагов/персонажа
+        }
     }
 }
-
-
-
-
-
-
-
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
-
-//namespace RPG.Core
-//{
-//    public class ActionScheduler : MonoBehaviour
-//    {
-//        MonoBehaviour currentAction;
-//        public void StartAction(MonoBehaviour action)
-//        {
-//            if (currentAction == action) return;
-//            if (currentAction != null)
-//            {
-//                print("Cancelling" + currentAction);
-//            }
-//            currentAction = action;
-//        }
-//        // перс побежал, сработал currentAction = action;
-//        // затем второй заход, вызывается if (currentAction == action) return;
-//        // поэтому мы не попадаем в if (currentAction != null)
-//        // потом атакуем action != currentAction и уже теперь
-//        // срабатывает if (currentAction != null)
-//        // так мы узнаём когда закончилось последнее действие
-//    }
-//}
