@@ -10,8 +10,10 @@ namespace RPG.Control
 {
     public class EnemyController : MonoBehaviour
     {
-        [SerializeField] float patrolDistance = 5f;
+        [SerializeField] float patrolDistance = 5f;        
         [SerializeField] PatrolPath patrolPath = null;
+        [SerializeField] float patrolSpeed = 3f;
+        [SerializeField] float chaseSpeed = 5f;
         [SerializeField] float waypointAvailability = 1f;
         [SerializeField] float waypointDwellTime = 4f;
         private GameObject player;
@@ -52,6 +54,7 @@ namespace RPG.Control
 
         private void PatrolBehaviour()
         {
+            mover.SetSpeed(patrolSpeed);
             Vector3 nextPosition = guardPosition;   // стартовая позиция игрока
             if (patrolPath != null)
             {
@@ -92,6 +95,7 @@ namespace RPG.Control
         {
             timeSinceLastSawPlayer = 0;
             fighter.Attack(player);
+            mover.SetSpeed(chaseSpeed);
         }
 
         private bool IsPlayerInRange()
