@@ -29,27 +29,26 @@ namespace RPG.SceneManagement
 
         IEnumerator SceneLoad()
         {            
-            DontDestroyOnLoad(gameObject); // не уничтожай сразу объект, вызвавший корутину, с прошлой сцены
+            DontDestroyOnLoad(gameObject);
             Fader fader = FindObjectOfType<Fader>();
             yield return fader.FadeOut(fadeOutTime);
-            yield return SceneManager.LoadSceneAsync(nextLvlName);  // если загрузить лвл будет тяжело то fader.FadeOut сделает экран белым до тех пор пока 
-                                                                    // не отработает LoadSceneAsync и только потом запустится FadeIn
-
+            // save lvl
+            SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
+            wrapper.Save();
+            yield return SceneManager.LoadSceneAsync(nextLvlName); 
+            // load lvl
+            wrapper.Load();
             Portal nextPortal = GetNextPortal();
             UpdatePlayerPosition(nextPortal);
-            yield return new WaitForSeconds(fadeWaitTime);  // Fader Canvas Group Alpha будет fadeWaitTime секунд 1(белым)
+            wrapper.Save();
+            yield return new WaitForSeconds(fadeWaitTime);
             yield return fader.FadeIn(fadeInTime);
             Destroy(gameObject);
-            // yield return сработает только ПОСЛЕ ПОЛНОЙ АСИНХРОННОЙ ЗАГРУЗКИ уровня.
-            // делаем это асинхронно потому что обычный LoadScene пытается загрузить уровень в течение ОДНОГО следующего фрейма
-            // если уровень будет "тяжёлым" то возможно будет работать звук, но картинка и сама программа/игра зафризится
-            // до того момента пока всё не прогрузится(при обычном LoadScene)
         }
 
         private void UpdatePlayerPosition(Portal nextPortal)
         {
             GameObject player = GameObject.FindWithTag("Player");
-            //player.transform.position = nextPortal.portalSpawnPoint.position;
             player.GetComponent<NavMeshAgent>().Warp(nextPortal.portalSpawnPoint.position);
             player.transform.rotation = nextPortal.portalSpawnPoint.rotation;
         }
@@ -58,7 +57,7 @@ namespace RPG.SceneManagement
         {
             foreach (Portal portal in FindObjectsOfType<Portal>())
             {
-                if (portal == this) continue;           // это portal, DontDestroyOnLoad(gameObject), из предыдущей сцены
+                if (portal == this) continue;
                 if (portal.destination != destination) continue;
                 return portal;
             }

@@ -1,10 +1,8 @@
 ﻿using RPG.Movement;
 using RPG.Combat;
 using RPG.Core;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
+using RPG.Attributes;
 
 namespace RPG.Control
 {
@@ -20,6 +18,7 @@ namespace RPG.Control
         private Fighter fighter;
         private Health health;
         private Mover mover;
+        private Collider colider;
         private Vector3 guardPosition;
         private float timeSinceLastSawPlayer = Mathf.Infinity;
         private float timeSinceArrivedAtPoint = Mathf.Infinity;
@@ -31,10 +30,13 @@ namespace RPG.Control
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
+            colider = GetComponent<Collider>();
             guardPosition = transform.position;
         }
         void Update()
-        {
+        { 
+            colider.enabled = !health.IsDead();
+
             if (health.IsDead()) return; 
             if (IsPlayerInRange() && fighter.CanAttack(player))
             {
@@ -55,7 +57,7 @@ namespace RPG.Control
         private void PatrolBehaviour()
         {
             mover.SetSpeed(patrolSpeed);
-            Vector3 nextPosition = guardPosition;   // стартовая позиция игрока
+            Vector3 nextPosition = guardPosition;   // стартовая позиция
             if (patrolPath != null)
             {
                 if (AtWayPoint())

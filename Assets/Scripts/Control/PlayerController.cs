@@ -1,23 +1,22 @@
 ﻿using RPG.Combat;
 using RPG.Movement;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using RPG.Core;
+using RPG.Attributes;
 
 namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
         Health health;
+        Collider colider;
         private void Start()
         {
-            health = GetComponent<Health>();            
+            health = GetComponent<Health>();
+            colider = GetComponent<Collider>();            
         }
         void Update()
-        {            
+        {
+            colider.enabled = !health.IsDead();
             if (health.IsDead()) return;
             if (InteractWithCombat()) return;
             if(InteractWithMovement()) return;
