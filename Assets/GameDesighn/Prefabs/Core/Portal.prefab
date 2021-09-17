@@ -107,3 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLvlName: 
   portalSpawnPoint: {fileID: 1288837494952331766}
+  destination: 0
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeWaitTime: 0.5

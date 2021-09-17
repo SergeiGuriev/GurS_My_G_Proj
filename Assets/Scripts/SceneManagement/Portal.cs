@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
+using RPG.Control;
 
 namespace RPG.SceneManagement
 {
@@ -31,18 +32,30 @@ namespace RPG.SceneManagement
         {            
             DontDestroyOnLoad(gameObject);
             Fader fader = FindObjectOfType<Fader>();
+
+            PlayerController playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            playerController.enabled = false;
+
+
             yield return fader.FadeOut(fadeOutTime);
             // save lvl
             SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
             wrapper.Save();
-            yield return SceneManager.LoadSceneAsync(nextLvlName); 
+            yield return SceneManager.LoadSceneAsync(nextLvlName);
+
+            PlayerController newPlayerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            newPlayerController.enabled = false;
+
             // load lvl
             wrapper.Load();
             Portal nextPortal = GetNextPortal();
             UpdatePlayerPosition(nextPortal);
             wrapper.Save();
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return fader.FadeIn(fadeInTime);
+            fader.FadeIn(fadeInTime);
+
+            newPlayerController.enabled = true;
+
             Destroy(gameObject);
         }
 

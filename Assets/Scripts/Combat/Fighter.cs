@@ -4,10 +4,11 @@ using RPG.Core;
 using RPG.Saving;
 using RPG.Attributes;
 using RPG.Stats;
+using System.Collections.Generic;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable
+    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
     {
         [SerializeField] float timeBetweenAttacs = 1f;
         [SerializeField] Transform rightHandWeaponPosition = null;
@@ -32,7 +33,7 @@ namespace RPG.Combat
             timeSinceLastAttack += Time.deltaTime;
             if (target == null) return;
             if (target.IsDead()) return;
-            if (!GetIsInRange())
+            if (!GetIsInRange(target.transform))
             {
                 GetComponent<Mover>().MoveTo(target.transform.position);
             }
@@ -70,14 +71,13 @@ namespace RPG.Combat
         private void Hit()
         {
             if (target == null) return;
-            int damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
+            float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
             if (cWeapon.HasProjectile())
             {
                 cWeapon.LaunchProjectile(rightHandWeaponPosition, leftHandWeaponPosition, target, gameObject, damage);
             }
             else
-            {
-                //target.TakeDamage(gameObject, cWeapon.GetWeaponDamage());                
+            {             
                 target.TakeDamage(gameObject, damage);
             }
         }
@@ -86,14 +86,18 @@ namespace RPG.Combat
         {
             Hit();
         }
-        private bool GetIsInRange()
+        private bool GetIsInRange(Transform targetTransform)
         {
-            return Vector3.Distance(transform.position, target.transform.position) < cWeapon.GetWeaponRange();
+            return Vector3.Distance(transform.position, targetTransform.position) < cWeapon.GetWeaponRange();
         }
 
         public bool CanAttack(GameObject combatTarget)
         {
             if (combatTarget == null) return false;
+            if (!GetComponent<Mover>().CanMoveTo(combatTarget.transform.position) && !GetIsInRange(combatTarget.transform))
+            {
+                return false;
+            }
             Health target = combatTarget.GetComponent<Health>();
             return target != null && !target.IsDead();
         }
@@ -131,6 +135,21 @@ namespace RPG.Combat
         public Health GetTarget()
         {
             return target;
+        }
+
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return cWeapon.GetWeaponDamage();
+            }
+        }
+        public IEnumerable<float> GetPercentageModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return cWeapon.GetPercentageBonus();
+            }
         }
     }
 }

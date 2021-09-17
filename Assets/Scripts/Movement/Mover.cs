@@ -10,9 +10,10 @@ namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction, ISaveable
     {
+        [SerializeField] float maxNavMeshPathLength = 40f;
         NavMeshAgent navMeshAgent;
         Health health;
-        private void Start()
+        private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             health = GetComponent<Health>();
@@ -44,15 +45,15 @@ namespace RPG.Movement
             navMeshAgent.destination = destination;
             navMeshAgent.isStopped = false;
         }
-
         public void Cancel()
         {
             navMeshAgent.isStopped = true;
         }
 
-        public void SetSpeed(float speed) 
-        { 
-            navMeshAgent.speed = speed; 
+
+        public void SetSpeed(float speed)
+        {
+            navMeshAgent.speed = speed;
         }
 
         public object CaptureState()
@@ -67,10 +68,43 @@ namespace RPG.Movement
         public void RestoreState(object state)
         {
             Dictionary<string, object> data = (Dictionary<string, object>)state;
-            GetComponent<NavMeshAgent>().enabled = false;
+            navMeshAgent.enabled = false;
             transform.position = ((SerializableVector3)data["position"]).ToVector();
             transform.eulerAngles = ((SerializableVector3)data["rotation"]).ToVector();
-            GetComponent<NavMeshAgent>().enabled = true;
+            navMeshAgent.enabled = true;
+        }
+
+        public bool CanMoveTo(Vector3 destination)
+        {
+            NavMeshPath navMeshPath = new NavMeshPath();
+            bool hasPath = NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, navMeshPath);
+            if (!hasPath)
+            {
+                return false;
+            }
+            if (navMeshPath.status != NavMeshPathStatus.PathComplete)
+            {
+                return false;
+            }
+            if (GetNavMeshPathLength(navMeshPath) > maxNavMeshPathLength)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private float GetNavMeshPathLength(NavMeshPath path)
+        {
+            float total = 0;
+            if (path.corners.Length < 2)
+            {
+                return total;
+            }
+            for (int i = 0; i < path.corners.Length - 1; i++)
+            {
+                total += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+            }
+            return total;
         }
     }
 }

@@ -9,7 +9,8 @@ public class Weapon : ScriptableObject
     [SerializeField] AnimatorOverrideController weaponOverrideController = null;
 
     [SerializeField] float weaponRange = 2f;
-    [SerializeField] int weaponDamage = 5;
+    [SerializeField] float weaponDamage = 5f;
+    [SerializeField] float percentageBonus = 0;
     [SerializeField] bool isRightHand = true;
 
     [SerializeField] Projectile projectile = null;
@@ -63,9 +64,14 @@ public class Weapon : ScriptableObject
     {
         return weaponRange;
     }
-    public int GetWeaponDamage()
+    public float GetWeaponDamage()
     {
         return weaponDamage;
+    }
+
+    public float GetPercentageBonus()
+    {
+        return percentageBonus;
     }
 
     public bool HasProjectile()
@@ -73,7 +79,7 @@ public class Weapon : ScriptableObject
         return projectile != null;
     }
 
-    public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, int calculatedDamage)
+    public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float calculatedDamage)
     {
         Projectile projectileInst = Instantiate(projectile, GetHandPosition(rightHand, leftHand).position, Quaternion.identity);
         projectileInst.SetTarget(target, instigator, calculatedDamage);

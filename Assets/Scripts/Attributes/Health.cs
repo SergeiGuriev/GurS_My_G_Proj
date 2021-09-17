@@ -2,21 +2,39 @@
 using RPG.Saving;
 using RPG.Core;
 using RPG.Stats;
+using UnityEngine.Events;
+using System;
 
 namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] int health = -1;
+        [SerializeField] TakeDamageEvent takeDamage;
+        [SerializeField] UnityEvent onDie;
+
+        [System.Serializable]
+        public class TakeDamageEvent : UnityEvent<float>
+        {
+            // этот класс нужен для того чтобы вместо статического значения урона можно было передать динамическое
+        }
+        private float health = -1f;
         private bool isDead;
 
         private void Start()
-        {
-            GetComponent<BaseStats>().onLvlUp += RegenerateHealth;
+        {            
             if (health < 0)
             {
-                health = GetComponent<BaseStats>().GetStat(Stat.Health);
+                health = GetComponent<BaseStats>().GetStat(Stat.Health);                
             }
+        }
+        private void OnEnable()
+        {
+            GetComponent<BaseStats>().onLvlUp += RegenerateHealth;
+        }
+
+        private void OnDisable()
+        {
+            GetComponent<BaseStats>().onLvlUp -= RegenerateHealth;
         }
 
         private void RegenerateHealth()
@@ -29,16 +47,20 @@ namespace RPG.Attributes
             return isDead;
         }
 
-        public void TakeDamage(GameObject instigator, int damage)
+        public void TakeDamage(GameObject instigator, float damage)
         {
-            print(gameObject.name + " took damage: "+damage);
-            health = Mathf.Max(health - damage, 0);
+            health = Mathf.Max(health - damage, 0);            
             if (health == 0)
             {
+                onDie.Invoke();
                 Die();
                 AwardExperience(instigator);
             }
-        }
+            else
+            {
+                takeDamage.Invoke(damage);    // запустить UnityEvent
+            }
+        }       
 
         public float GetHealth()
         {
@@ -71,7 +93,7 @@ namespace RPG.Attributes
 
         public void RestoreState(object state)
         {
-            health = (int)state;
+            health = (float)state;
             if (health == 0)
             {
                 Die();
@@ -81,6 +103,16 @@ namespace RPG.Attributes
         public float GetHealthPercentage()
         {
             return (health * 100) / GetComponent<BaseStats>().GetStat(Stat.Health);
+        }
+
+        public float GetFraction()
+        {
+            return health / GetComponent<BaseStats>().GetStat(Stat.Health);
+        }
+
+        public void Heal(float healthRestorePoints)
+        {
+            health = Mathf.Min(health+healthRestorePoints, GetMaxHealth());
         }
     }
 }

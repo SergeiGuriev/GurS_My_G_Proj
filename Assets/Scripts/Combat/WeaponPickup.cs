@@ -2,22 +2,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RPG.Control;
+using RPG.Movement;
+using RPG.Attributes;
 
 namespace RPG.Combat
 {
-    public class WeaponPickup : MonoBehaviour
+    public class WeaponPickup : MonoBehaviour, IRaycastable
     {
         [SerializeField] Weapon weapon = null;
+        [SerializeField] float healthRestorePoints = 0;
         [SerializeField] float respawnDelay = 4f;
+
+        public CursorType GetCursorType()
+        {
+            return CursorType.Pickup;
+        }
+
+        public bool HandleRaycast(PlayerController callingController)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                //Pickup(callingController.GetComponent<Fighter>());
+                callingController.GetComponent<Mover>().StartMoveAction(callingController.target);
+            }
+            return true;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                other.gameObject.GetComponent<Fighter>().EquipWeapon(weapon);
-                //Destroy(gameObject);
-                StartCoroutine(RespawnWeaponAgain(respawnDelay));
+                Pickup(other.gameObject);
             }
         }
+
+        private void Pickup(GameObject picupObj)
+        {
+            if (weapon != null)
+            {
+                picupObj.GetComponent<Fighter>().EquipWeapon(weapon);
+            }
+            if (healthRestorePoints > 0)
+            {
+                picupObj.GetComponent<Health>().Heal(healthRestorePoints);
+            }
+            StartCoroutine(RespawnWeaponAgain(respawnDelay));
+        }
+
         IEnumerator RespawnWeaponAgain(float delay)
         {
             ShowWeapon(false);

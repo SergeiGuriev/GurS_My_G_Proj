@@ -14,7 +14,7 @@ namespace RPG.Attributes
         }
         private void Update()
         {
-            GetComponent<Text>().text = $"{health.GetHealth()}/{health.GetMaxHealth()}";
+            GetComponent<Text>().text = string.Format("{0:0}/{1:0}", health.GetHealth(), health.GetMaxHealth());
         }
     }
 }

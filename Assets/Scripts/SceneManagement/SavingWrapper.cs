@@ -9,6 +9,8 @@ namespace RPG.SceneManagement
     {
         const string saveFileName = "save";
         [SerializeField] float fadeInTime = 0.2f;
+
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.L))

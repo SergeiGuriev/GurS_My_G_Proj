@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2395898264210070240}
   m_Layer: 0
-  m_Name: LH_Equiper_Bow
+  m_Name: LH_Equipped_Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

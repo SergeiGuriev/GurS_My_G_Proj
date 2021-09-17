@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfa84f80408e7de48815d8430b8f066f, type: 3}
+  m_Script: {fileID: 11500000, guid: d220864893e88d84b8be5e25215cc168, type: 3}
   m_Name: BowWithBlueProjectile
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 6374382194771824939, guid: ffa9e73b65e9b104ba0c6cfaa6ebf9be,
@@ -18,6 +18,7 @@ MonoBehaviour:
     type: 2}
   weaponRange: 20
   weaponDamage: 8
+  percentageBonus: 0
   isRightHand: 0
   projectile: {fileID: 6015738152077495913, guid: 01230a2f4b0569143ad2591e106d721b,
     type: 3}

@@ -3,6 +3,7 @@ using RPG.Combat;
 using RPG.Core;
 using UnityEngine;
 using RPG.Attributes;
+using System;
 
 namespace RPG.Control
 {
@@ -14,6 +15,8 @@ namespace RPG.Control
         [SerializeField] float chaseSpeed = 5f;
         [SerializeField] float waypointAvailability = 1f;
         [SerializeField] float waypointDwellTime = 4f;
+        [SerializeField] float aggressiveBehCooldownTime = 2f;
+        [SerializeField] float attentionDistance = 5f;
         private GameObject player;
         private Fighter fighter;
         private Health health;
@@ -24,27 +27,33 @@ namespace RPG.Control
         private float timeSinceArrivedAtPoint = Mathf.Infinity;
         private float suspicionTime = 5f;
         private int currentWaypointIndex = 0;
-        private void Start()
+        private float aggressiveBehaviourTime = Mathf.Infinity;
+        private bool isEnemyAggresive = false;
+        private void Awake()
         {
             player = GameObject.FindWithTag("Player");
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
             colider = GetComponent<Collider>();
+        }
+        private void Start()
+        {            
             guardPosition = transform.position;
         }
         void Update()
         { 
             colider.enabled = !health.IsDead();
 
-            if (health.IsDead()) return; 
-            if (IsPlayerInRange() && fighter.CanAttack(player))
+            if (health.IsDead()) return;
+            if (IsAggressive() && fighter.CanAttack(player))
             {
                 AttackBehaviour();
             }
             else if (timeSinceLastSawPlayer < suspicionTime)
             {
                 SuspicionBehaviour();       // else не будет срабатывать потому что мы его постоянно отменяем в 
+                isEnemyAggresive = false;
             }                               // <ActionScheduler>().CancelCurrentAction();
             else
             {
@@ -52,6 +61,7 @@ namespace RPG.Control
             }
             timeSinceLastSawPlayer += Time.deltaTime;
             timeSinceArrivedAtPoint += Time.deltaTime;
+            aggressiveBehaviourTime += Time.deltaTime;
         }
 
         private void PatrolBehaviour()
@@ -98,17 +108,43 @@ namespace RPG.Control
             timeSinceLastSawPlayer = 0;
             fighter.Attack(player);
             mover.SetSpeed(chaseSpeed);
+
+            if (isEnemyAggresive == false)
+            {
+                isEnemyAggresive = true;
+                drawGuardGroupAttention();
+            }
         }
 
-        private bool IsPlayerInRange()
+        private void drawGuardGroupAttention()
         {
-            return Vector3.Distance(player.transform.position, transform.position) <= patrolDistance;
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, attentionDistance, Vector3.up, 0);
+            foreach (RaycastHit hit in hits)
+            {
+                EnemyController controller = hit.collider.GetComponent<EnemyController>();
+                if (controller == null)
+                {
+                    continue;
+                }                
+                controller.AggressiveReaction();                
+            }
         }
 
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, patrolDistance);
+        }
+
+        private bool IsAggressive()
+        {
+            return Vector3.Distance(player.transform.position, transform.position) <= patrolDistance || aggressiveBehaviourTime < aggressiveBehCooldownTime;
+        }
+
+
+        public void AggressiveReaction()
+        {
+            aggressiveBehaviourTime = 0;
         }
     }
 }

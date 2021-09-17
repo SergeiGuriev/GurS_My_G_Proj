@@ -1,14 +1,16 @@
 ﻿using RPG.Attributes;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Combat
 {
     public class Projectile : MonoBehaviour
     {
         [SerializeField] float speed = 10f;
-        [SerializeField] int damage = 0;
+        [SerializeField] float damage = 0;
         [SerializeField] bool isAimbotActive = false;
+        [SerializeField] UnityEvent onHit;
         Health target = null;
         GameObject instigator = null;
 
@@ -36,6 +38,7 @@ namespace RPG.Combat
         {
             if (other.GetComponent<Health>() != target) return;
             if (target.IsDead()) return;
+            onHit.Invoke();
             target.TakeDamage(instigator, damage);
             Destroy(gameObject);
         }
@@ -44,7 +47,7 @@ namespace RPG.Combat
             yield return new WaitForSeconds(2.5f);
             Destroy(gameObject);
         }
-        public void SetTarget(Health target, GameObject instigator, int damage)
+        public void SetTarget(Health target, GameObject instigator, float damage)
         {
             this.target = target;
             this.damage = damage;

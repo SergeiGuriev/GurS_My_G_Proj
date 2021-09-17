@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfa84f80408e7de48815d8430b8f066f, type: 3}
+  m_Script: {fileID: 11500000, guid: d220864893e88d84b8be5e25215cc168, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 0}
@@ -17,6 +17,7 @@ MonoBehaviour:
     type: 2}
   weaponRange: 20
   weaponDamage: 5
+  percentageBonus: 0
   isRightHand: 0
   projectile: {fileID: 1812848523514147747, guid: a6bd3dd6afff35e49af841c869f7e7a5,
     type: 3}

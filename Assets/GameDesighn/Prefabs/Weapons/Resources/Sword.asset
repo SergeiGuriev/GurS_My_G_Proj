@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfa84f80408e7de48815d8430b8f066f, type: 3}
+  m_Script: {fileID: 11500000, guid: d220864893e88d84b8be5e25215cc168, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 9093350824373563497, guid: eb77f622779cc3b4198c9cb061a5a80c,
@@ -17,6 +17,7 @@ MonoBehaviour:
   weaponOverrideController: {fileID: 22100000, guid: 43ca09c87a2039443b8fbf6111e6d633,
     type: 2}
   weaponRange: 2
-  weaponDamage: 10
+  weaponDamage: 5
+  percentageBonus: 10
   isRightHand: 1
   projectile: {fileID: 0}
