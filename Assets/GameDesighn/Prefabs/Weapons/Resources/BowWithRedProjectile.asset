@@ -17,7 +17,7 @@ MonoBehaviour:
   weaponOverrideController: {fileID: 22100000, guid: 318efdce1388c3b49a292ecfac2b17b9,
     type: 2}
   weaponRange: 20
-  weaponDamage: 8
+  weaponDamage: 3
   percentageBonus: 0
   isRightHand: 0
   projectile: {fileID: 7742481139991231413, guid: ac10564d75dda4f4dbbcafa40cf20f38,

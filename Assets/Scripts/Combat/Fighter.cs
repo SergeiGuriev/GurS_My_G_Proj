@@ -19,7 +19,7 @@ namespace RPG.Combat
         float timeSinceLastAttack = Mathf.Infinity;     // для того чтоб в if (timeSinceLastAttack > timeBetweenAttacs) ПЕРЕД ПЕРВЫМ УДАРОМ всегда было true
         private Weapon cWeapon;
 
-        private void Start()
+        private void Awake()
         {
             if (cWeapon == null)
             {

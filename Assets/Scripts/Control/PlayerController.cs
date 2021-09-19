@@ -131,7 +131,8 @@ namespace RPG.Control
         private void SetCursor(CursorType type)
         {
             CursorMapping cursorMapping = GetCursorMapping(type);
-            Cursor.SetCursor(cursorMapping.texture, cursorMapping.hotspot, CursorMode.Auto);
+            Cursor.SetCursor(cursorMapping.texture, cursorMapping.hotspot, CursorMode.ForceSoftware);
+            //Cursor.SetCursor(cursorMapping.texture, cursorMapping.hotspot, CursorMode.Auto);
         }
 
         private CursorMapping GetCursorMapping(CursorType type)

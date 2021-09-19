@@ -1,17 +1,17 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.SceneManagement
 {
     public class Fader : MonoBehaviour
     {
+        
         CanvasGroup canvasGroup;
         Coroutine activeFade = null;
         private void Start()
         {
-            canvasGroup = GetComponent<CanvasGroup>();
-        }
+            canvasGroup = GetComponent<CanvasGroup>();            
+        }        
 
         public void FadeOutImmediate()
         {
@@ -54,6 +54,7 @@ namespace RPG.SceneManagement
                 canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, target, Time.deltaTime / time);
                 yield return null;
             }
-        }        
+        }
+
     }
 }

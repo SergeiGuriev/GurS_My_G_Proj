@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 0}
   weaponOverrideController: {fileID: 0}
   weaponRange: 1
-  weaponDamage: 5
+  weaponDamage: 2
   percentageBonus: 0
   isRightHand: 1
   projectile: {fileID: 0}

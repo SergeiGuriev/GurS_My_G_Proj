@@ -31,7 +31,6 @@ namespace RPG.Control
         private bool isEnemyAggresive = false;
         private void Awake()
         {
-            player = GameObject.FindWithTag("Player");
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
@@ -39,6 +38,7 @@ namespace RPG.Control
         }
         private void Start()
         {            
+            player = GameObject.FindWithTag("Player");
             guardPosition = transform.position;
         }
         void Update()
