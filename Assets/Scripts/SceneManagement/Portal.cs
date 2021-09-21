@@ -40,12 +40,6 @@ namespace RPG.SceneManagement
             yield return fader.FadeOut(fadeOutTime);
             // save lvl
             SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
-            // для этого сейва обязательно должен отработать лоад, а потом сделать сохр этого же сейва.
-            // похоже, что нельзя давать этим 2 сейвам разные ключи!!!!! и это всё работа над одним сейвом, а не 2 отдельных
-
-            // можно попробовать отсюда кидать bool saveFromPortal = true
-            // и в сейвврапере проверять на тру, если тру то выполнять обработку по другому
-            // в других местах передавай false
 
             wrapper.Save(true);//true
             yield return SceneManager.LoadSceneAsync(nextLvlName);
@@ -54,7 +48,7 @@ namespace RPG.SceneManagement
             newPlayerController.enabled = false;
 
             // load lvl
-            wrapper.Load(true);//true
+            wrapper.Load(true, null, false);//true. // этот null никак не влияет на исполнение
             Portal nextPortal = GetNextPortal();
             UpdatePlayerPosition(nextPortal);
             wrapper.Save(true);//true

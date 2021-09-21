@@ -9,8 +9,7 @@ using UnityEngine.AI;
 namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
-    {       
-
+    {
         [System.Serializable]
         struct CursorMapping
         {
@@ -19,19 +18,41 @@ namespace RPG.Control
             public Vector2 hotspot;
         }
 
+        [SerializeField] GameObject menu = null;
         [SerializeField] float maxNavMeshProjDistance = 1f;
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float raycastRadius = 0.5f;
         
-        Health health;
-        Collider colider;
+        private Health health;
+        private Collider colider;
+        private bool isMenuEntered = false;
+
+
         private void Awake()
         {
             health = GetComponent<Health>();
             colider = GetComponent<Collider>();
         }
+        private void Start()
+        {
+            menu.SetActive(false);
+        }
         void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (!isMenuEntered)
+                {
+                    menu.SetActive(true);
+                    isMenuEntered = true;
+                }
+                else
+                {
+                    menu.SetActive(false);
+                    isMenuEntered = false;
+                }
+            }
+
             colider.enabled = !health.IsDead();
             if (InteractWithComponent())
             {

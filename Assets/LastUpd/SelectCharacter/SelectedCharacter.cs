@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SelectedCharacter : MonoBehaviour
 {
+    [SerializeField] int Level1_SceneBuildIndex = -1;
+
     private int characterIndex = 0;
     private int currenCharacter;
 
@@ -114,8 +116,7 @@ public class SelectedCharacter : MonoBehaviour
     public void ChangeScene()
     {
         isSceneChanged = true;
-
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(Level1_SceneBuildIndex);
     }
 
     public static bool[] CheckNewGameStart()
