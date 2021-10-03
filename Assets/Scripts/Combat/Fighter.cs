@@ -151,5 +151,10 @@ namespace RPG.Combat
                 yield return cWeapon.GetPercentageBonus();
             }
         }
+
+        public float GetCDamage()
+        {
+            return GetComponent<BaseStats>().GetStat(Stat.Damage);
+        }
     }
 }

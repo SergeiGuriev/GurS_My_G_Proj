@@ -5,10 +5,12 @@ using RPG.Attributes;
 using System;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+using RPG.Stats;
 
 namespace RPG.Control
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IDbProvider
     {
         [System.Serializable]
         struct CursorMapping
@@ -171,6 +173,21 @@ namespace RPG.Control
         private static Ray GetMouseRay()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
+        }
+
+        public object[] GetStates()
+        {
+            object[] arr =
+            {
+                SceneManager.GetActiveScene().name,
+                transform.name,
+                GetComponent<Health>().GetHealth(),
+                null,
+                GetComponent<BaseStats>().GetStat(Stat.ExperienceToLevelUp),
+                GetComponent<Fighter>().GetCDamage(),
+                GetComponent<BaseStats>().GetLevel()
+            };
+            return arr;
         }
     }
 }

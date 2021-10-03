@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonListController : MonoBehaviour
@@ -12,6 +13,7 @@ public class ButtonListController : MonoBehaviour
 
 
     [SerializeField] private GameObject buttonTemplate;
+    [SerializeField] public int changeCharacterSceneIndex = 0;
     private List<string> savesList;
     private List<GameObject> buttons;
     private SavingWrapper savingWrapper;
@@ -98,5 +100,10 @@ public class ButtonListController : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void BackToChangeCharacter()
+    {
+        SceneManager.LoadScene(changeCharacterSceneIndex);
     }
 }

@@ -4,10 +4,13 @@ using RPG.Core;
 using UnityEngine;
 using RPG.Attributes;
 using System;
+using UnityEngine.SceneManagement;
+using RPG.Stats;
+using System.Collections;
 
 namespace RPG.Control
 {
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : MonoBehaviour, IDbProvider
     {
         [SerializeField] float patrolDistance = 5f;        
         [SerializeField] PatrolPath patrolPath = null;
@@ -145,6 +148,22 @@ namespace RPG.Control
         public void AggressiveReaction()
         {
             aggressiveBehaviourTime = 0;
+        }
+
+
+        public object[] GetStates()
+        {
+            object[] arr =
+            {
+                SceneManager.GetActiveScene().name,
+                transform.name,
+                GetComponent<Health>().GetHealth(),
+                GetComponent<BaseStats>().GetStat(Stat.ExperienceReward),
+                null,
+                GetComponent<Fighter>().GetCDamage(),
+                GetComponent<BaseStats>().GetLevel()
+            };
+            return arr;
         }
     }
 }
