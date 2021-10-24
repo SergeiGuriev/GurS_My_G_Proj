@@ -29625,6 +29625,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 12.90236
       objectReference: {fileID: 0}
+    - target: {fileID: 7330999955679283737, guid: 542161fc94ab4c1489773317527c45bf,
+        type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330999955679283737, guid: 542161fc94ab4c1489773317527c45bf,
+        type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5698620680782677989, guid: 542161fc94ab4c1489773317527c45bf,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 542161fc94ab4c1489773317527c45bf, type: 3}
 --- !u!1 &4001879882011261673 stripped
@@ -30063,6 +30078,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 34.89034
+      objectReference: {fileID: 0}
+    - target: {fileID: 6282380336211388467, guid: b932fb0913f2339428b90607672719be,
+        type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6282380336211388467, guid: b932fb0913f2339428b90607672719be,
+        type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6282380335690602841, guid: b932fb0913f2339428b90607672719be,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b932fb0913f2339428b90607672719be, type: 3}

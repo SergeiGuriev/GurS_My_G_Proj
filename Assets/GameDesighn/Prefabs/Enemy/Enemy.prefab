@@ -965,6 +965,46 @@ PrefabInstance:
       propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 8581217136993277389, guid: c6f6824e805679c4da8a85d20c37b871,
+        type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 8581217136993277389, guid: c6f6824e805679c4da8a85d20c37b871,
+        type: 3}
+      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 8581217136993277389, guid: c6f6824e805679c4da8a85d20c37b871,
+        type: 3}
+      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8581217136993277389, guid: c6f6824e805679c4da8a85d20c37b871,
+        type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725974986932712049, guid: c6f6824e805679c4da8a85d20c37b871,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725974986932712049, guid: c6f6824e805679c4da8a85d20c37b871,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: aa838a1cd7cae9947b7b19239838b9af, type: 3}
+    - target: {fileID: 6755394261659588657, guid: c6f6824e805679c4da8a85d20c37b871,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755394261659588657, guid: c6f6824e805679c4da8a85d20c37b871,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 03735778f8eeff548ae6b1ed27406677, type: 3}
     m_RemovedComponents:
     - {fileID: 5056989587600610351, guid: c6f6824e805679c4da8a85d20c37b871, type: 3}
     - {fileID: 3888095179139501093, guid: c6f6824e805679c4da8a85d20c37b871, type: 3}

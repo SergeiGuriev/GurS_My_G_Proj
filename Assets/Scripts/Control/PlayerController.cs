@@ -24,12 +24,10 @@ namespace RPG.Control
         [SerializeField] float maxNavMeshProjDistance = 1f;
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float raycastRadius = 0.5f;
-        
+
         private Health health;
         private Collider colider;
         private bool isMenuEntered = false;
-
-
         private void Awake()
         {
             health = GetComponent<Health>();
@@ -56,6 +54,7 @@ namespace RPG.Control
             }
 
             colider.enabled = !health.IsDead();
+
             if (InteractWithComponent())
             {
                 return;
@@ -70,7 +69,6 @@ namespace RPG.Control
                 SetCursor(CursorType.None);
                 return;
             }
-
             if (InteractWithMovement()) return;
 
             SetCursor(CursorType.None);
@@ -81,7 +79,7 @@ namespace RPG.Control
             RaycastHit[] hits = RaycastAllSorted();
             foreach (RaycastHit hit in hits)
             {
-               IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
+                IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
                 foreach (IRaycastable raycastable in raycastables)
                 {
                     if (raycastable.HandleRaycast(this))
@@ -96,7 +94,6 @@ namespace RPG.Control
 
         private RaycastHit[] RaycastAllSorted()
         {
-            //RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
             RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(), raycastRadius);
             float[] distances = new float[hits.Length];
             for (int i = 0; i < hits.Length; i++)
@@ -114,7 +111,7 @@ namespace RPG.Control
 
         public Vector3 target;
         private bool InteractWithMovement()
-        {            
+        {
             bool hasHit = RaycastNavMesh(out target);
             if (hasHit)
             {
@@ -135,7 +132,7 @@ namespace RPG.Control
         private bool RaycastNavMesh(out Vector3 target)
         {
             target = new Vector3();
-            RaycastHit hit;            
+            RaycastHit hit;
             bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
             if (!hasHit)
             {
@@ -155,7 +152,6 @@ namespace RPG.Control
         {
             CursorMapping cursorMapping = GetCursorMapping(type);
             Cursor.SetCursor(cursorMapping.texture, cursorMapping.hotspot, CursorMode.ForceSoftware);
-            //Cursor.SetCursor(cursorMapping.texture, cursorMapping.hotspot, CursorMode.Auto);
         }
 
         private CursorMapping GetCursorMapping(CursorType type)

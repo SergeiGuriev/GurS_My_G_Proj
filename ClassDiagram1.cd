@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RPG.Control.PlayerController">
+    <Position X="11.75" Y="8" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="RPG.Control.PlayerController.CursorMapping" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Control\PlayerController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <AssociationLine Name="health" Type="RPG.Attributes.Health" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.188" Y="8" />
+        <Point X="13.188" Y="5.746" />
+        <Point X="15.5" Y="5.746" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAEEgAACAAAACAMAIABAwgAAAAAAEAAAEAAAAAIEg=</HashCode>
+      <FileName>Assets\Scripts\Control\PlayerController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="health" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RPG.Control.EnemyController">
+    <Position X="18.5" Y="11.25" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQUQEgCACIACAIAAAAAAIACQAEIQCghCCQUAACUAkg=</HashCode>
+      <FileName>Assets\Scripts\Control\EnemyController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="patrolPath" />
+      <Field Name="fighter" />
+      <Field Name="health" />
+      <Field Name="mover" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RPG.Control.PatrolPath">
+    <Position X="22" Y="12" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACEAAAAAAAAAAAAAAAAAQAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Control\PatrolPath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.Movement.Mover">
+    <Position X="18.25" Y="8.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="health" Type="RPG.Attributes.Health" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="20.031" Y="8.5" />
+        <Point X="20.031" Y="5.188" />
+        <Point X="17" Y="5.188" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAQBAAQAAAAAAAEBAAAAAIAABABACCAAAAAEg=</HashCode>
+      <FileName>Assets\Scripts\Movement\Mover.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="health" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RPG.Attributes.Health">
+    <Position X="15.5" Y="4" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="RPG.Attributes.Health.TakeDamageEvent" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Attributes\Health.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AIAAAAACECAAAACgAAAAEAAAABAAAASICAABgCAACAg=</HashCode>
+      <FileName>Assets\Scripts\Attributes\Health.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RPG.Combat.Fighter">
+    <Position X="14.25" Y="9" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="cWeapon" Type="Weapon" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.875" Y="11.454" />
+        <Point X="15.875" Y="11.829" />
+        <Point X="16.688" Y="11.829" />
+        <Point X="16.688" Y="12.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>IIQAQAAAQEgAJAAAIAMAFAQCEIAQAAAAACAAAARAAEA=</HashCode>
+      <FileName>Assets\Scripts\Combat\Fighter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="cWeapon" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Weapon">
+    <Position X="15.5" Y="12.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AACgAAAAARABAQAAAAAAAAAAAAAARAARAABAAgCQAAA=</HashCode>
+      <FileName>Assets\Scripts\Combat\Weapon.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="projectile" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RPG.Attributes.Health_UI">
+    <Position X="13" Y="4.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEg=</HashCode>
+      <FileName>Assets\Scripts\Attributes\Health_UI.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="health" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RPG.Attributes.HealthBar">
+    <Position X="18.25" Y="3.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAgAAAgAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Attributes\HealthBar.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="enemyHealth" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RPG.Combat.Enemy_Health_UI">
+    <Position X="13.75" Y="6.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="fighter" Type="RPG.Combat.Fighter" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15" Y="7.541" />
+        <Point X="15" Y="8.156" />
+        <Point X="16.625" Y="8.156" />
+        <Point X="16.625" Y="9" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkA=</HashCode>
+      <FileName>Assets\Scripts\Combat\Enemy_Health_UI.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="fighter" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RPG.Combat.CombatTarget">
+    <Position X="12.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Combat\CombatTarget.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RPG.Combat.Projectile">
+    <Position X="18.25" Y="5.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAgAAACAAgAAQIAAAAAAAAAAAAYAAQAAgQAAAAAI=</HashCode>
+      <FileName>Assets\Scripts\Combat\Projectile.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="target" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RPG.Combat.WeaponPickup">
+    <Position X="12.75" Y="13.75" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAMACABCACAAAAAQAAQAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Combat\WeaponPickup.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="weapon" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RPG.Core.ActionScheduler">
+    <Position X="21" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAgAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\ActionScheduler.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="currentAction" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RPG.Core.PersistentObjectSpawner">
+    <Position X="7" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Core\PersistentObjectSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.SceneManagement.Portal">
+    <Position X="7" Y="6" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="RPG.SceneManagement.Portal.DestinationIdentifier" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SceneManagement\Portal.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AgAAAAIAAAAACAAAAAkAAAAAAAACAAAAQABABAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SceneManagement\Portal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.SceneManagement.Fader">
+    <Position X="9" Y="7" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>MACAAAAAACCAAAAAAAAABAAAAAAAAAIACAQAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SceneManagement\Fader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.Saving.SaveableEntity">
+    <Position X="7" Y="9.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAgAAAEAIAAAAAAAAAAAAgAAAAAIA=</HashCode>
+      <FileName>Assets\Scripts\Saving\SaveableEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.Saving.SavingSystem">
+    <Position X="9.25" Y="12.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAgIAAAAAAAAAAAQAAEAAAIAEAAAAABAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Saving\SavingSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.Saving.SerializableVector3">
+    <Position X="9.25" Y="10.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAABgAQAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Saving\SerializableVector3.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.SceneManagement.SavingWrapper">
+    <Position X="7" Y="11.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAUCoIgAACAADgAAAAAAAAAAAAEAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SceneManagement\SavingWrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.Stats.BaseStats">
+    <Position X="23.75" Y="5.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="progression" Type="RPG.Stats.CharacterProgression" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="24" Y="5.75" />
+        <Point X="24" Y="4.5" />
+        <Point X="22.75" Y="4.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AACAAAIACCQAQAAAAAACAAABAAIEAIDIAQBAAAAECEA=</HashCode>
+      <FileName>Assets\Scripts\Stats\BaseStats.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="characterClass" />
+      <Field Name="progression" />
+      <Field Name="experience" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RPG.Stats.CharacterProgression">
+    <Position X="21" Y="3.25" Width="1.75" />
+    <NestedTypes>
+      <Class Name="RPG.Stats.CharacterProgression.ProgressionCharacterClass" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Stats\CharacterProgression.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="RPG.Stats.CharacterProgression.ProgressionStat" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Stats\CharacterProgression.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAgAAAAABAAAAAAABAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Stats\CharacterProgression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.Stats.Experience" BaseTypeListCollapsed="true">
+    <Position X="25" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAIAAAgAAAAAAAAAEAAAAASAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Stats\Experience.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.399" />
+  </Class>
+  <Class Name="RPG.Stats.Experience_UI">
+    <Position X="24.25" Y="14.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Stats\Experience_UI.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="experience" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RPG.Stats.Level_UI">
+    <Position X="23.5" Y="9.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Stats\Level_UI.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="baseStats" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RPG.UI.DamageText">
+    <Position X="11.25" Y="4" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgQAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\DamageText.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.UI.DamageTextSpawner">
+    <Position X="11.5" Y="6" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\DamageTextSpawner.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="damageTextPref" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="IAction">
+    <Position X="21.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\IAction.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="RPG.Stats.CharacterClass">
+    <Position X="21" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAQIAAAA=</HashCode>
+      <FileName>Assets\Scripts\Stats\CharacterClass.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

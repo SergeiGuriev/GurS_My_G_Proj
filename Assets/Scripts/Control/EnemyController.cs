@@ -3,10 +3,8 @@ using RPG.Combat;
 using RPG.Core;
 using UnityEngine;
 using RPG.Attributes;
-using System;
 using UnityEngine.SceneManagement;
 using RPG.Stats;
-using System.Collections;
 
 namespace RPG.Control
 {
@@ -20,18 +18,21 @@ namespace RPG.Control
         [SerializeField] float waypointDwellTime = 4f;
         [SerializeField] float aggressiveBehCooldownTime = 2f;
         [SerializeField] float attentionDistance = 5f;
+
         private GameObject player;
         private Fighter fighter;
         private Health health;
         private Mover mover;
         private Collider colider;
         private Vector3 guardPosition;
+
         private float timeSinceLastSawPlayer = Mathf.Infinity;
         private float timeSinceArrivedAtPoint = Mathf.Infinity;
         private float suspicionTime = 5f;
         private int currentWaypointIndex = 0;
         private float aggressiveBehaviourTime = Mathf.Infinity;
         private bool isEnemyAggresive = false;
+
         private void Awake()
         {
             fighter = GetComponent<Fighter>();
@@ -39,11 +40,13 @@ namespace RPG.Control
             mover = GetComponent<Mover>();
             colider = GetComponent<Collider>();
         }
+
         private void Start()
         {            
             player = GameObject.FindWithTag("Player");
             guardPosition = transform.position;
         }
+
         void Update()
         { 
             colider.enabled = !health.IsDead();
@@ -55,9 +58,9 @@ namespace RPG.Control
             }
             else if (timeSinceLastSawPlayer < suspicionTime)
             {
-                SuspicionBehaviour();       // else не будет срабатывать потому что мы его постоянно отменяем в 
+                SuspicionBehaviour();
                 isEnemyAggresive = false;
-            }                               // <ActionScheduler>().CancelCurrentAction();
+            }
             else
             {
                 PatrolBehaviour();
@@ -70,7 +73,7 @@ namespace RPG.Control
         private void PatrolBehaviour()
         {
             mover.SetSpeed(patrolSpeed);
-            Vector3 nextPosition = guardPosition;   // стартовая позиция
+            Vector3 nextPosition = guardPosition;
             if (patrolPath != null)
             {
                 if (AtWayPoint())
@@ -91,15 +94,16 @@ namespace RPG.Control
             float distanceToWaypoint = Vector3.Distance(transform.position, GetCurrentWaypoint());
             return distanceToWaypoint < waypointAvailability;
         }
+
         private void CurrentCycleWaypoint()
         {
             currentWaypointIndex = patrolPath.GetNextIndex(currentWaypointIndex);
         }
+
         private Vector3 GetCurrentWaypoint()
         {
             return patrolPath.GetWaypoint(currentWaypointIndex);
         }
-
 
         private void SuspicionBehaviour()
         {
@@ -144,12 +148,10 @@ namespace RPG.Control
             return Vector3.Distance(player.transform.position, transform.position) <= patrolDistance || aggressiveBehaviourTime < aggressiveBehCooldownTime;
         }
 
-
         public void AggressiveReaction()
         {
             aggressiveBehaviourTime = 0;
         }
-
 
         public object[] GetStates()
         {

@@ -11,11 +11,11 @@ namespace RPG.Stats
         [SerializeField] CharacterProgression progression = null;
         [SerializeField] GameObject levelUpParticles = null;
         [SerializeField] bool haveModifiersUsingPermission = false;
+
         public event Action onLvlUp;
 
         Experience experience = null;
         int currentLvl = 0;
-
 
         private void Awake()
         {
@@ -58,15 +58,6 @@ namespace RPG.Stats
             Instantiate(levelUpParticles, transform);
         }
 
-        //private void Update()
-        //{
-        //    int newLevel = CalculateLvl();  // каждый кадр должен запускать СНОВА И СНОВА CalculateLvl() метод для того чтоб просто узнать
-        //    if (newLevel > currentLvl)      // обновился он или нет
-        //    {
-        //        currentLvl = newLevel;
-        //        print("Lvl Up!");
-        //    }
-        //}
         public int GetLevel()
         {
             if (currentLvl < 1)
@@ -78,7 +69,6 @@ namespace RPG.Stats
 
         public float GetStat(Stat stat)
         {
-            //return progression.GetStat(stat, characterClass, GetLevel()) + GetAdditiveModifier(stat);
             return (GetBaseStat(stat) + GetAdditiveModifier(stat)) * (1 + GetPercentageModifier(stat) / 100);
         }
 
@@ -105,9 +95,9 @@ namespace RPG.Stats
         {
             if (!haveModifiersUsingPermission) return 0;
             float res = 0;
-            foreach (IModifierProvider provider in GetComponents<IModifierProvider>())  // находим все компоненты у которых реализован интерфейс IModifierProvider для this объекта
+            foreach (IModifierProvider provider in GetComponents<IModifierProvider>())
             {
-                foreach (float modifier in provider.GetAdditiveModifiers(stat))    // перебираем все yield return'ы реализованного метода интерфейса у которого есть нужный аргумент stat
+                foreach (float modifier in provider.GetAdditiveModifiers(stat))
                 {
                     res += modifier;
                 }
@@ -120,7 +110,7 @@ namespace RPG.Stats
             Experience experience = GetComponent<Experience>();
             if (experience == null)
             {
-                return startLvl;    // у врагов нету повышения уровня после убийства ГГ
+                return startLvl;
             }
             float currentXp = experience.GetXpVal();
             int penultimateLvl = progression.GetLevels(Stat.ExperienceToLevelUp, characterClass);
@@ -132,7 +122,6 @@ namespace RPG.Stats
                     return level;
                 }
             }
-            //Debug.Log("penultimateLvl = "+penultimateLvl);
             return penultimateLvl;
         }
     }

@@ -3,7 +3,6 @@ using RPG.Saving;
 using RPG.Core;
 using RPG.Stats;
 using UnityEngine.Events;
-using System;
 
 namespace RPG.Attributes
 {
@@ -15,18 +14,19 @@ namespace RPG.Attributes
         [System.Serializable]
         public class TakeDamageEvent : UnityEvent<float>
         {
-            // этот класс нужен для того чтобы вместо статического значения урона можно было передать динамическое
+
         }
         private float health = -1f;
         private bool isDead;
 
         private void Start()
-        {            
+        {
             if (health < 0)
             {
-                health = GetComponent<BaseStats>().GetStat(Stat.Health);                
+                health = GetComponent<BaseStats>().GetStat(Stat.Health);
             }
         }
+
         private void OnEnable()
         {
             GetComponent<BaseStats>().onLvlUp += RegenerateHealth;
@@ -49,7 +49,7 @@ namespace RPG.Attributes
 
         public void TakeDamage(GameObject instigator, float damage)
         {
-            health = Mathf.Max(health - damage, 0);            
+            health = Mathf.Max(health - damage, 0);
             if (health == 0)
             {
                 onDie.Invoke();
@@ -58,14 +58,15 @@ namespace RPG.Attributes
             }
             else
             {
-                takeDamage.Invoke(damage);    // запустить UnityEvent
+                takeDamage.Invoke(damage);
             }
-        }       
+        }
 
         public float GetHealth()
         {
             return health;
         }
+
         public float GetMaxHealth()
         {
             return GetComponent<BaseStats>().GetStat(Stat.Health);
@@ -112,7 +113,7 @@ namespace RPG.Attributes
 
         public void Heal(float healthRestorePoints)
         {
-            health = Mathf.Min(health+healthRestorePoints, GetMaxHealth());
+            health = Mathf.Min(health + healthRestorePoints, GetMaxHealth());
         }
     }
 }

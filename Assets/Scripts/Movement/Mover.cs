@@ -25,13 +25,12 @@ namespace RPG.Movement
         }
 
         void UpdateAnimator()
-        {                                                                                // velocity = скорость отдаления от нулевой z координаты
-            Vector3 globalVelocity = navMeshAgent.velocity;                              // скорость движения относительно (0,0,0) мировых координат
-            Vector3 localVelocity = transform.InverseTransformDirection(globalVelocity); // если персонаж будет бежать в сторону отдаления от мировой Z координаты
-                                                                                         //Debug.Log(globalVelocity.z);                                               // то его velocity будет отрицательным
-            float speed = localVelocity.z;                                               // поэтому нужно расчитывать скорость относительно (0,0,0) координат персонажа
-            GetComponent<Animator>().SetFloat("forwardSpeed", speed);  // мне нужно знать с какой скоростью(изменения Z координаты) персонаж отдаляется от своей позиции, 
-        }                                                              // а не относительно нуля мира
+        {
+            Vector3 globalVelocity = navMeshAgent.velocity;
+            Vector3 localVelocity = transform.InverseTransformDirection(globalVelocity);
+            float speed = localVelocity.z;
+            GetComponent<Animator>().SetFloat("forwardSpeed", speed);
+        }
 
         public void StartMoveAction(Vector3 destination)
         {
@@ -58,7 +57,6 @@ namespace RPG.Movement
 
         public object CaptureState()
         {
-            //return new SerializableVector3(transform.position);
             Dictionary<string, object> data = new Dictionary<string, object>();
             data["position"] = new SerializableVector3(transform.position);
             data["rotation"] = new SerializableVector3(transform.eulerAngles);

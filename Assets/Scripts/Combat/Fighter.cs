@@ -16,7 +16,7 @@ namespace RPG.Combat
         [SerializeField] Weapon defWeapon = null;
 
         Health target;
-        float timeSinceLastAttack = Mathf.Infinity;     // для того чтоб в if (timeSinceLastAttack > timeBetweenAttacs) ПЕРЕД ПЕРВЫМ УДАРОМ всегда было true
+        float timeSinceLastAttack = Mathf.Infinity;
         private Weapon cWeapon;
 
         private void Awake()
@@ -26,7 +26,6 @@ namespace RPG.Combat
                 EquipWeapon(defWeapon);
             }
         }
-
 
         private void Update()
         {
@@ -50,7 +49,6 @@ namespace RPG.Combat
             weapon.SpawnWeapon(rightHandWeaponPosition, leftHandWeaponPosition, animator);
         }
 
-        // Unarmed animation trigger
         void AttackBehaviour()
         {
             transform.LookAt(target.transform);
@@ -67,7 +65,6 @@ namespace RPG.Combat
             GetComponent<Animator>().SetTrigger("attack");
         }
 
-        // Animation Event Hit
         private void Hit()
         {
             if (target == null) return;
@@ -77,7 +74,7 @@ namespace RPG.Combat
                 cWeapon.LaunchProjectile(rightHandWeaponPosition, leftHandWeaponPosition, target, gameObject, damage);
             }
             else
-            {             
+            {
                 target.TakeDamage(gameObject, damage);
             }
         }
